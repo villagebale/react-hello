@@ -1,4 +1,4 @@
-// import { Component } from "react";
+import { Mons } from "../../App";
 import Card from "../card/card.component";
 import './card-list.styles.css'
 // export default class CardList extends Component {
@@ -18,8 +18,11 @@ import './card-list.styles.css'
 //         )
 //     }
 // }
-const CardList = (props) => {
-    const { filterMons } = props;
+type CardListProps = {
+    filterMons: Mons[];
+}
+const CardList = ({ filterMons }: CardListProps) => {
+    
 
     return (
         <div className="card-list">

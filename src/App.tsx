@@ -1,16 +1,23 @@
 // import { Component } from 'react';
 // import logo from './logo.svg';
-import { useState, useEffect } from 'react';
+import { ChangeEvent, useState, useEffect } from 'react';
 import CardList from './components/card-list/card-list.component';
 import SearchBox from './components/search-box/search-box.component';
+import { getData } from './utils/data.utils';
 import './App.css';
+
+export type Mons = {
+  id: string;
+  name: string;
+  email: string;
+}
 
 const App = () => {
   const [searchField, setSearchField] = useState('');
-  const [mons,setMons] = useState([]);
+  const [mons,setMons] = useState<Array<Mons>>([]);
   const [filterMons, setFilterMons] = useState(mons);
 
-  const onSearchChange = (event) => {
+  const onSearchChange = (event: ChangeEvent<HTMLInputElement>): void => {
     // console.log(event);
     const searchFieldString = event.target.value.toLocaleLowerCase();
     // this.setState({ searchField })
@@ -19,11 +26,11 @@ const App = () => {
 
   
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then((response) => response.json())
-      .then((users) => {
-        setMons(users);
-      })
+    const fetchUsers = async () => {
+      const users = await getData<Array<Mons>>('https://jsonplaceholder.typicode.com/users');
+      setMons(users);
+    };
+    fetchUsers();
   },[]);
 
   

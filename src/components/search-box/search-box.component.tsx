@@ -1,4 +1,5 @@
 // import { Component } from "react";
+import { ChangeEvent } from 'react';
 import './search-box.styles.css'
 // export default class SearchBox extends Component {
 
@@ -16,7 +17,22 @@ import './search-box.styles.css'
 //     }
 // }
 
-const SearchBox = (props) => {
+interface ISearchBoxProps {
+    className: string;
+    placeHolder?: string;
+}
+
+interface ISearchBoxProps {
+    onSearchHandler: (event: ChangeEvent<HTMLInputElement>) => void;
+}
+
+type SearchBoxProps = {
+    className: string;
+    placeHolder?: string;
+    onSearchHandler: (event: ChangeEvent<HTMLInputElement>) => void;
+}
+
+const SearchBox = (props : SearchBoxProps) => {
     // onSearchChange = props.onSearchChange;
     return (
         <input
